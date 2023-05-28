@@ -1,6 +1,7 @@
-const requestHandler = require("./requestHandler"); // Add this line
+const requestHandler = require("./requestHandler");
+const Task = require("./classes/task");
 
-const todoLogger = requestHandler.createLogger("todos.log"); // Update this line
+const todoLogger = requestHandler.loggerCreator
 
 const todoList = [];
 let id = 1;
