@@ -7,26 +7,38 @@ app.use(bodyParser.json());
 
 app.get("/todo/health", requestHandler.healthCheck);
 app.post("/todo", requestHandler.createTodo);
+app.get("/todo/size", requestHandler.getTodoSize);
+app.get("/todo/content", requestHandler.getTodoContent);
+app.put("/todo", requestHandler.updateTodoStatus);
+app.delete("/todo", requestHandler.deleteTodo);
 
-// New Routes
-app.get("/todo/size", (req, res) => {
-  requestHandler.getTodoSize(req, res);
+const logger = requestHandler.requestLogger;
+const levels = ["ERROR", "INFO", "DEBUG"];
+
+app.get("/logs/level", (req, res) => {
+  logger.info(`Incoming request | resource: /logs/level | HTTP Verb GET`);
+  if (!levels.includes(req.query["logger-level"])) {
+    res.status(400).send({
+      errorMessage: "Error: no such level"
+    });
+    return;
+  }
+  res.status(200).send({ result: logger.level.toUpperCase() });
 });
 
-app.get("/todo/content", (req, res) => {
-  requestHandler.getTodoContent(req, res);
+app.put("/logs/level", (req, res) => {
+  logger.info(`Incoming request | resource: /logs/level | HTTP Verb PUT`);
+  if (!levels.includes(req.query["logger-level"])) {
+    res.status(400).send({
+      errorMessage: "Error: no such level"
+    });
+    return;
+  }
+
+  logger.level = req.query["logger-level"].toLowerCase();
+  res.status(200).send({ result: logger.level.toUpperCase() });
 });
 
-app.put("/todo", (req, res) => {
-  requestHandler.updateTodoStatus(req, res);
-});
-
-app.delete("/todo", (req, res) => {
-  requestHandler.deleteTodo(req, res);
-});
-
-const port = 9583; // Specify the desired port number here
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(9583, () => {
+  console.log("Server listening on port 9583...");
 });

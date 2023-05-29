@@ -1,9 +1,11 @@
+// requestHandler.js
 const winston = require("winston");
 const { format } = require("date-fns");
 const todoService = require("./todoService");
 const Task = require("./classes/task");
+const todoList = todoService.todoList; // Import the todoList array
 
-function loggerCreator(filename) {
+function loggerCreator(filename, logLevel) {
   const transportOptions = {
     filename,
     format: winston.format.combine(
@@ -20,7 +22,7 @@ function loggerCreator(filename) {
   };
 
   return winston.createLogger({
-    level: "info",
+    level: logLevel,
     transports: [
       new winston.transports.Console(transportOptions),
       new winston.transports.File(transportOptions),
@@ -28,13 +30,18 @@ function loggerCreator(filename) {
   });
 }
 
-const requestLogger = loggerCreator("requests.log"); // Update this line
-const todoLogger = loggerCreator("todos.log"); // Update this line
+const requestLogger = loggerCreator("requests.log", "info");
+const todoLogger = loggerCreator("todos.log", "info");
 
 let requestNumber = 1;
 
-//1
- function healthCheck(req, res) {
+function getTodoSize(req, res) {
+  const size = todoList.length;
+  res.status(200).send({ size });
+}
+
+// Health Check
+function healthCheck(req, res) {
   const start = Date.now();
   requestLogger.info(
     `Incoming request | #${requestNumber} | resource: /todo/health | HTTP Verb GET`,
@@ -49,119 +56,71 @@ let requestNumber = 1;
   res.status(200).send("OK");
 }
 
- function createTodo(req, res) {
-  const start = Date.now();
-  requestLogger.info(
-    `Incoming request | #${requestNumber} | resource: /todo | HTTP Verb POST`,
-    { requestNumber }
-  );
+// Create Todo
+let id = 1;
 
-  const { title, content, dueDate } = req.body;
+function createTodo(req, res) {
+  const body = req.body;
 
-  try {
-    const task = new Task(requestNumber, title, content, dueDate);
-
-    const durationMs = Date.now() - start;
-    requestLogger.debug(`request #${requestNumber} duration: ${durationMs}ms`, {
-      requestNumber,
-    });
-
-    todoLogger.info(`Creating new Task with Title [${task.getTitle()}]`, {
-      requestNumber,
-    });
-    todoLogger.debug(
-      `Currently there are ${todoService.getTodoCount()} Tasks in the system. New Task will be assigned with id ${task.getId()}`,
-      { requestNumber }
-    );
-
-    requestNumber++;
-    res.status(201).send(task);
-  } catch (error) {
-    res.status(error.statusCode || 500).send({ error: error.message });
-  }
-}
-
-// 3 - Get the size of the todo list based on status
-function getTodoSize(req, res) {
-  const status = req.query.status;
-
-  if (
-    status !== "ALL" &&
-    status !== "PENDING" &&
-    status !== "LATE" &&
-    status !== "DONE"
-  ) {
-    return res.status(400).send(
-      JSON.stringify({
-        errorMessage: "Bad request.",
-      })
-    );
+  const todoExists = todoList.find((item) => item.title === body.title);
+  if (todoExists) {
+    const errorMessage = `Error: TODO with the title ${body.title} already exists in the system`;
+    res.status(409).send({ errorMessage });
+    todoLogger.error(errorMessage);
   } else {
-    if (status === "ALL") {
-      return res.status(200).send(
-        JSON.stringify({
-          result: todoService.getTodoCount(),
-        })
-      );
+    const dueDate = new Date(body.dueDate);
+
+    if (dueDate < Date.now()) {
+      const errorMessage = "Error: Can't create new TODO with a due date in the past";
+      res.status(409).send({ errorMessage });
+      todoLogger.error(errorMessage);
     } else {
-      const filteredArray = todoList.filter((item) => {
-        return item.getStatus() === status;
-      });
-      return res.status(200).send(
-        JSON.stringify({
-          result: filteredArray.length,
-        })
-      );
+      const newTodo = new Task(id++, body.title, body.content, dueDate);
+      todoList.push(newTodo);
+
+      todoLogger.info(`Creating new TODO with Title [${body.title}] and ID [${newTodo.getId()}]`);
+      todoLogger.debug(`Currently there are ${todoList.length} TODOs in the system.`);
+
+      res.send({ result: newTodo.getId() });
     }
   }
 }
 
-// 4 - Get TODOs data based on status and sort order
+// Get Todo Content
+// Get Todo Content
+function sortTodoArray(todoArray, sortBy) {
+  const sortOptions = {
+    DUE_DATE: (a, b) => a.dueDate.getTime() - b.dueDate.getTime(),
+    TITLE: (a, b) => a.title.localeCompare(b.title),
+  };
+
+  return todoArray.sort(sortOptions[sortBy] || ((a, b) => a.id - b.id));
+}
+
 function getTodoContent(req, res) {
   const status = req.query.status;
   const sortBy = req.query.sortBy;
 
-  if (
-    status !== "ALL" &&
-    status !== "PENDING" &&
-    status !== "LATE" &&
-    status !== "DONE"
-  ) {
-    return res.status(400).send(
-      JSON.stringify({
-        errorMessage: "Bad request.",
-      })
-    );
+  const validStatusValues = ["ALL", "PENDING", "LATE", "DONE"];
+  const validSortByValues = ["ID", "DUE_DATE", "TITLE"];
+
+  if (!validStatusValues.includes(status) || !validSortByValues.includes(sortBy)) {
+    todoLogger.error("Bad request.", { requestNumber });
+    return res.status(400).send({
+      errorMessage: "Bad request.",
+    });
   }
 
   let filteredArray = [];
   if (status === "ALL") {
     filteredArray = todoList;
+  } else if (status === "LATE") {
+    filteredArray = todoList.filter((item) => item.getDueDate().getTime() < Date.now());
   } else {
     filteredArray = todoList.filter((item) => item.getStatus() === status);
   }
 
-  if (sortBy === "ID") {
-    filteredArray.sort((a, b) => a.getId() - b.getId());
-  } else if (sortBy === "DUE_DATE") {
-    filteredArray.sort((a, b) => a.getDueDate() - b.getDueDate());
-  } else if (sortBy === "TITLE") {
-    filteredArray.sort((a, b) => {
-      if (a.getTitle() < b.getTitle()) {
-        return -1;
-      } else if (a.getTitle() > b.getTitle()) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-  } else if (sortBy) {
-    return res.status(400).send(
-      JSON.stringify({
-        errorMessage: "Bad request.",
-      })
-    );
-  }
+  filteredArray = sortTodoArray(filteredArray, sortBy);
 
   const result = filteredArray.map((item) => ({
     id: item.getId(),
@@ -171,65 +130,65 @@ function getTodoContent(req, res) {
     dueDate: item.getDueDate(),
   }));
 
-  res.status(200).send(
-    JSON.stringify({
-      result: result,
-    })
-  );
+  todoLogger.info(`Extracting todos content. Filter: ${status} | Sorting by: ${sortBy}`);
+  todoLogger.debug(`There are a total of ${todoList.length} todos in the system. The result holds ${filteredArray.length} todos`);
+
+  res.status(200).send({
+    result: result,
+  });
 }
 
-// 5 - Update TODO status
+// Update Todo Status
 function updateTodoStatus(req, res) {
-  const id = req.query.id;
+  const id = parseInt(req.query.id);
   const status = req.query.status;
 
-  const todo = todoList.find((item) => {
-    return item.getId() == id;
-  });
+  const todo = todoList.find((item) => item.getId() === id);
 
   if (!todo) {
-    res.status(404).send(
-      JSON.stringify({
-        errorMessage: `Error: no such TODO with id ${id}`,
-      })
-    );
-    return;
+    const errorMessage = `Error: no such TODO with id ${id}`;
+    todoLogger.error(errorMessage, { requestNumber });
+    return res.status(404).json({ errorMessage });
   }
 
-  if (status !== "PENDING" && status !== "LATE" && status !== "DONE") {
-    res.status(400).send(
-      JSON.stringify({
-        errorMessage: "Bad request.",
-      })
-    );
-    return;
+  if (!["PENDING", "LATE", "DONE"].includes(status)) {
+    const errorMessage = "Error: Invalid status";
+    todoLogger.error(errorMessage, { requestNumber });
+    return res.status(400).json({ errorMessage });
   }
 
-  const oldStatus = todo.getStatus();
+  const prevStatus = todo.getStatus();
   todo.setStatus(status);
 
-  res.status(200).send(
-    JSON.stringify({
-      result: oldStatus,
-    })
+  requestLogger.info(
+    `Incoming request | #${requestNumber} | resource: /todo | HTTP Verb PUT`,
+    { requestNumber }
   );
+  todoLogger.info(
+    `Update TODO id [${id}] state to ${status}`,
+    { requestNumber }
+  );
+
+  requestNumber++;
+  res.status(200).json({ result: prevStatus });
 }
 
-// 6 - Delete TODO
+// Delete Todo
 function deleteTodo(req, res) {
-  const query_id = req.query.id;
-  const parsed_id = parseInt(query_id); // convert string to int
+  const queryId = req.query.id;
+  const parsedId = parseInt(queryId); // convert string to int
 
-  if (query_id === undefined || !Number.isInteger(parsed_id)) {
+  if (queryId === undefined || !Number.isInteger(parsedId)) {
     // check if the id is valid
+    todoLogger.error(`Error: invalid TODO id ${queryId}`);
     return res.status(400).json({
-      errorMessage: "Error: invalid TODO id " + query_id,
+      errorMessage: "Error: invalid TODO id " + queryId,
     });
   }
 
   let spliced = false;
   for (let i = 0; i < todoList.length; i++) {
-    if (todoList[i].getId() == parsed_id) {
+    if (todoList[i].getId() === parsedId) {
       todoList.splice(i, 1);
       spliced = true;
       break;
@@ -237,17 +196,18 @@ function deleteTodo(req, res) {
   }
 
   if (spliced) {
-    return res.status(200).send(
-      JSON.stringify({
-        result: todoList.length + "",
-      })
+    todoLogger.info(`Removing todo id ${queryId}`);
+    todoLogger.debug(
+      `After removing todo id [${queryId}], there are ${todoList.length} TODOs in the system`
     );
+    return res.status(200).json({
+      result: todoList.length + "",
+    });
   } else {
-    return res.status(404).send(
-      JSON.stringify({
-        errorMessage: "Error: no such TODO with id " + query_id,
-      })
-    );
+    todoLogger.error(`Error: no such TODO with id ${queryId}`);
+    return res.status(404).json({
+      errorMessage: "Error: no such TODO with id " + queryId,
+    });
   }
 }
 
@@ -258,5 +218,6 @@ module.exports = {
   getTodoContent,
   updateTodoStatus,
   deleteTodo,
-  loggerCreator, // Add this line
+  requestLogger,
+  todoLogger,
 };

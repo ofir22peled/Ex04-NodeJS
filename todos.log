@@ -1,2 +1,112 @@
 [28-05-2023 18:33:43.554] INFO: Creating new Task with Title [New Year] | request #1
 [28-05-2023 19:03:30.939] INFO: Creating new Task with Title [Reception hours for kaplat] | request #1
+[28-05-2023 20:34:31.482] INFO: Creating new Task with Title [New Year] | request #1
+[28-05-2023 20:34:56.402] INFO: Creating new Task with Title [New Year] | request #2
+[29-05-2023 00:20:28.121] INFO: Creating new Task with Title [New Year] | request #1
+[29-05-2023 00:20:32.842] INFO: Creating new Task with Title [New Year] | request #2
+[29-05-2023 00:20:33.819] INFO: Creating new Task with Title [New Year] | request #3
+[29-05-2023 00:20:34.613] INFO: Creating new Task with Title [New Year] | request #4
+[29-05-2023 00:20:35.387] INFO: Creating new Task with Title [New Year] | request #5
+[29-05-2023 00:20:36.521] INFO: Creating new Task with Title [New Year] | request #6
+[29-05-2023 01:11:01.399] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:16.738] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:18.994] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:20.552] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:23.013] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:26.129] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:27.989] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:11:37.438] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:29:51.837] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:29:56.154] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:29:59.745] INFO: Total TODOs count for state ALL is 2 | request #3
+[29-05-2023 01:38:59.259] INFO: Extracting todos content. Filter: PENDING | Sorting by: TITLE | request #undefined
+[29-05-2023 01:39:05.079] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:39:08.571] INFO: Total TODOs count for state ALL is 1 | request #2
+[29-05-2023 01:39:12.125] INFO: Extracting todos content. Filter: PENDING | Sorting by: TITLE | request #undefined
+[29-05-2023 01:48:17.855] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:48:21.308] INFO: Total TODOs count for state ALL is 1 | request #2
+[29-05-2023 01:48:24.426] INFO: Extracting todos content. Filter: PENDING | Sorting by: TITLE | request #undefined
+[29-05-2023 01:48:28.215] ERROR: Error: no such TODO with id 5 | request #3
+[29-05-2023 01:48:36.032] ERROR: Error: no such TODO with id 1 | request #3
+[29-05-2023 01:54:02.406] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:54:09.620] ERROR: Error: no such TODO with id 1 | request #2
+[29-05-2023 01:56:07.917] ERROR: Error: no such TODO with id 5 | request #2
+[29-05-2023 01:56:15.474] ERROR: Error: no such TODO with id 0 | request #2
+[29-05-2023 01:56:20.177] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:56:24.278] INFO: Creating new TODO with Title [Reception hours for kaplat] | request #undefined
+[29-05-2023 01:57:53.512] ERROR: Error: no such TODO with id 0 | request #1
+[29-05-2023 01:57:57.109] ERROR: Error: no such TODO with id 0 | request #1
+[29-05-2023 01:58:00.640] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 01:58:06.210] INFO: Total TODOs count for state ALL is 1 | request #2
+[29-05-2023 01:58:19.076] ERROR: Error: no such TODO with id 1 | request #3
+[29-05-2023 01:59:46.385] ERROR: Error: no such TODO with id 1 | request #1
+[29-05-2023 01:59:56.880] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:00:05.656] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 02:00:07.427] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 02:00:10.175] INFO: Creating new TODO with Title [New Year] | request #undefined
+[29-05-2023 02:00:14.210] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:00:21.268] INFO: Creating new TODO with Title [Reception hours for kaplat] | request #undefined
+[29-05-2023 02:00:25.993] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:00:28.636] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:12:09.770] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:12:14.842] INFO: Creating new TODO with Title [New Year] and ID [[object Object]] | request #undefined
+[29-05-2023 02:12:18.791] INFO: Creating new TODO with Title [Reception hours for kaplat] and ID [[object Object]] | request #undefined
+[29-05-2023 02:12:21.973] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:12:24.414] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:17:40.184] INFO: Creating new TODO with Title [New Year] and ID [[object Object]] | request #undefined
+[29-05-2023 02:17:46.681] ERROR: Error: no such TODO with id 1 | request #2
+[29-05-2023 02:17:56.592] ERROR: Error: no such TODO with id 1 | request #2
+[29-05-2023 02:18:00.059] INFO: Creating new TODO with Title [Reception hours for kaplat] and ID [[object Object]] | request #undefined
+[29-05-2023 02:18:11.078] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:22:46.579] ERROR: Error: no such TODO with id 2 | request #undefined
+[29-05-2023 02:24:10.287] INFO: Creating new TODO with Title [New Year] and ID [1] | request #undefined
+[29-05-2023 02:24:13.646] ERROR: Error: TODO with the title New Year already exists in the system | request #undefined
+[29-05-2023 02:24:24.144] INFO: Extracting todos content. Filter: PENDING | Sorting by: TITLE | request #undefined
+[29-05-2023 02:24:28.178] INFO: Update TODO id [1] state to DONE | request #1
+[29-05-2023 02:24:43.537] INFO: Creating new TODO with Title [Reception hours for kaplat] and ID [2] | request #undefined
+[29-05-2023 02:24:55.053] INFO: Removing todo id 2 | request #undefined
+[29-05-2023 02:25:00.285] INFO: Update TODO id [1] state to LATE | request #2
+[29-05-2023 02:25:04.008] ERROR: Bad request. | request #3
+[29-05-2023 03:11:14.789] INFO: Creating new TODO with Title [Reception hours for kaplat] and ID [1] | request #undefined
+[29-05-2023 03:11:19.099] INFO: Creating new TODO with Title [New Year] and ID [2] | request #undefined
+[29-05-2023 03:11:25.899] INFO: Removing todo id 2 | request #undefined
+[29-05-2023 03:11:31.758] INFO: Update TODO id [1] state to LATE | request #1
+[29-05-2023 03:11:39.049] ERROR: Bad request. | request #2
+[29-05-2023 03:13:02.490] INFO: Update TODO id [1] state to LATE | request #2
+[29-05-2023 03:13:08.124] ERROR: Bad request. | request #3
+[29-05-2023 03:13:10.517] ERROR: Bad request. | request #3
+[29-05-2023 03:13:20.256] INFO: Creating new TODO with Title [New Year] and ID [3] | request #undefined
+[29-05-2023 03:13:30.523] ERROR: Bad request. | request #3
+[29-05-2023 03:16:53.422] ERROR: Bad request. | request #1
+[29-05-2023 03:16:57.602] INFO: Creating new TODO with Title [New Year] and ID [1] | request #undefined
+[29-05-2023 03:17:00.966] INFO: Update TODO id [1] state to LATE | request #1
+[29-05-2023 03:17:04.347] INFO: Update TODO id [1] state to LATE | request #2
+[29-05-2023 03:17:08.694] ERROR: Bad request. | request #3
+[29-05-2023 03:18:17.920] INFO: Creating new TODO with Title [New Year] and ID [1] | request #undefined
+[29-05-2023 03:18:22.683] INFO: Update TODO id [1] state to LATE | request #1
+[29-05-2023 03:18:23.549] INFO: Update TODO id [1] state to LATE | request #2
+[29-05-2023 03:18:26.612] ERROR: Bad request. | request #3
+[29-05-2023 03:18:27.688] ERROR: Bad request. | request #3
+[29-05-2023 03:18:28.707] ERROR: Bad request. | request #3
+[29-05-2023 03:18:29.669] ERROR: Bad request. | request #3
+[29-05-2023 03:18:30.467] ERROR: Bad request. | request #3
+[29-05-2023 03:24:21.218] ERROR: Bad request. | request #1
+[29-05-2023 03:24:23.728] ERROR: Bad request. | request #1
+[29-05-2023 03:24:27.211] INFO: Creating new TODO with Title [New Year] and ID [1] | request #undefined
+[29-05-2023 03:24:31.414] INFO: Update TODO id [1] state to LATE | request #1
+[29-05-2023 03:24:32.415] INFO: Update TODO id [1] state to LATE | request #2
+[29-05-2023 03:24:35.866] ERROR: Bad request. | request #3
+[29-05-2023 03:24:36.737] ERROR: Bad request. | request #3
+[29-05-2023 03:24:38.355] ERROR: Bad request. | request #3
+[29-05-2023 03:39:56.490] ERROR: Bad request. | request #1
+[29-05-2023 03:47:33.183] ERROR: Bad request. | request #1
+[29-05-2023 03:47:42.250] INFO: Creating new TODO with Title [New Year] and ID [1] | request #undefined
+[29-05-2023 03:47:45.453] ERROR: Bad request. | request #1
+[29-05-2023 03:47:49.262] INFO: Update TODO id [1] state to LATE | request #1
+[29-05-2023 03:47:50.728] INFO: Update TODO id [1] state to LATE | request #2
+[29-05-2023 03:47:53.380] ERROR: Bad request. | request #3
+[29-05-2023 03:55:42.892] ERROR: Bad request. | request #1
+[29-05-2023 03:55:47.028] INFO: Creating new TODO with Title [New Year] and ID [1] | request #undefined
+[29-05-2023 03:58:56.689] ERROR: Error: TODO with the title New Year already exists in the system | request #undefined
+[29-05-2023 03:59:02.355] ERROR: Error: TODO with the title New Year already exists in the system | request #undefined
+[29-05-2023 03:59:10.884] INFO: Extracting todos content. Filter: PENDING | Sorting by: TITLE | request #undefined
