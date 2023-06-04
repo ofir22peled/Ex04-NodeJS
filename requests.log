@@ -1,0 +1,18 @@
+[04-06-2023 14:08:21.574] INFO: Incoming request | #1 | resource: /todo | HTTP Verb PUT | request #1
+[04-06-2023 14:08:26.044] INFO: Incoming request | resource: /logs/level | HTTP Verb PUT | request #undefined
+[04-06-2023 14:08:29.507] INFO: Incoming request | #2 | resource: /todo | HTTP Verb PUT | request #2
+[04-06-2023 14:15:34.528] INFO: Incoming request | #3 | resource: /todo/health | HTTP Verb GET | request #3
+[04-06-2023 14:15:34.529] DEBUG: request #3 duration: 1ms | request #3
+[04-06-2023 14:15:46.384] INFO: Incoming request | #4 | resource: /todo/health | HTTP Verb GET | request #4
+[04-06-2023 14:15:46.385] DEBUG: request #4 duration: 1ms | request #4
+[04-06-2023 14:15:48.072] INFO: Incoming request | #5 | resource: /todo/health | HTTP Verb GET | request #5
+[04-06-2023 14:15:48.072] DEBUG: request #5 duration: 1ms | request #5
+[04-06-2023 14:15:49.504] INFO: Incoming request | #6 | resource: /todo/health | HTTP Verb GET | request #6
+[04-06-2023 14:15:49.505] DEBUG: request #6 duration: 0ms | request #6
+[04-06-2023 14:19:21.554] INFO: Incoming request | #7 | resource: /todo | HTTP Verb PUT | request #7
+[04-06-2023 14:19:29.227] INFO: Incoming request | #8 | resource: /todo | HTTP Verb PUT | request #8
+[04-06-2023 14:19:34.170] INFO: Incoming request | #9 | resource: /todo | HTTP Verb PUT | request #9
+[04-06-2023 14:19:43.574] INFO: Incoming request | #10 | resource: /todo | HTTP Verb PUT | request #10
+[04-06-2023 14:19:46.305] INFO: Incoming request | #11 | resource: /todo | HTTP Verb PUT | request #11
+[04-06-2023 14:19:49.705] INFO: Incoming request | #12 | resource: /todo | HTTP Verb PUT | request #12
+[04-06-2023 14:20:05.474] INFO: Incoming request | #13 | resource: /todo | HTTP Verb PUT | request #13

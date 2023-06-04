@@ -87,7 +87,6 @@ function createTodo(req, res) {
 }
 
 // Get Todo Content
-// Get Todo Content
 function sortTodoArray(todoArray, sortBy) {
   const sortOptions = {
     DUE_DATE: (a, b) => a.dueDate.getTime() - b.dueDate.getTime(),
